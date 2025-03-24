@@ -341,21 +341,3 @@ if __name__ == "__main__":
 
     network.run_simulation(until=5)
     network.snapshot()
-
-        
-
-
-
-    
-
-
-
-
-        
-        
-        
-        
-        
-        
-        
-        
