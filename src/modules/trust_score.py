@@ -38,7 +38,7 @@ class TrustNode(NetworkNode):
         for neighbor_id in self.get_neighbors():
             neighbor = network_nodes[neighbor_id]
             score = self.get_reputation_score(neighbor_id)
-            print(f"  → Trust in {neighbor_id} (Sybil: {neighbor.is_sybil}): {score:.2f}")
+            print(f"  → Trust in {neighbor_id} (Sybil: {neighbor.is_sybil}): {score:.4f}")
 
 class TrustScoreNetwork(MockNetwork):
     """
