@@ -22,8 +22,7 @@ class EigenTrustNetwork(TrustScoreNetwork):
     - Average global trust per node ≈ 1/N
     - Significantly lower values may indicate Sybil or untrusted behavior
     '''
-    def compute_global_trust_scores(self, damping_factor: float = 0.85, convergence_threshold: float = 1e-6, visualize: bool = True) -> dict:
-        
+    def compute_global_trust_scores(self, damping_factor: float = 0.85, convergence_threshold: float = 1e-6) -> dict:
         
         node_ids = list(self.nodes.keys())
         num_nodes = len(node_ids)
@@ -52,7 +51,6 @@ class EigenTrustNetwork(TrustScoreNetwork):
         uniform_vector = np.ones(num_nodes) / num_nodes
         trust_vector = uniform_vector.copy()
         change = float('inf')
-        trust_vector_history = [trust_vector.copy()]
 
         #Using main Eigen Trust formula
         #t_new = (1 - λ) * e + λ * Cᵀ * t
@@ -64,8 +62,7 @@ class EigenTrustNetwork(TrustScoreNetwork):
             updated_trust_vector = (1 - damping_factor) * uniform_vector + damping_factor * trust_matrix.T.dot(trust_vector)
             change = np.linalg.norm(updated_trust_vector - trust_vector)
             trust_vector = updated_trust_vector
-            trust_vector_history.append(trust_vector.copy())
-
+   
         return {node_ids[i]: trust_vector[i] for i in range(num_nodes)}
 
 
